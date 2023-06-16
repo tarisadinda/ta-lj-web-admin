@@ -1,12 +1,14 @@
 import styles from '@/styles/components/dashboard/SummaryCard.module.scss'
 import { Card } from '@mui/material'
 
-export default function SummaryCard() {
+export default function SummaryCard(props) {
+    const { totalCount, companyCount, employeeCount } = props
+    
     return(<>
         <Card variant="outlined" className={styles.cardWrap}>
-            <p className={styles.count}><b>Total Pendaftar Baru: 23</b></p>
-            <p>5 Akun Perusahaan</p>
-            <p>18 Akun Pekerja</p>
+            <p className={styles.count}><b>Total Akun: {totalCount}</b></p>
+            <p>{companyCount} Akun Perusahaan</p>
+            <p>{employeeCount} Akun Pekerja</p>
         </Card>
     </>)
 }
