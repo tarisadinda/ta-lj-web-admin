@@ -7,6 +7,7 @@ import CustomTable from '@/components/table'
 import CustomDropdown from '@/components/custom-dropdown'
 import EditIcon from '@mui/icons-material/Edit'
 import VisibilityIcon from '@mui/icons-material/Visibility'
+import { useRouter } from 'next/router'
 
 const dummyData = [
     {
@@ -62,22 +63,6 @@ const colNames = [
     },
 ]
 
-const detailBtn = (id) => {
-    console.log('Detail: ' + id)
-}
-
-const actionBtn = [
-    {
-        icon: <EditIcon />,
-        id: 'edit'
-    },
-    {
-        icon: <VisibilityIcon />,
-        id: 'detail',
-        function: (id) => detailBtn(id)
-    },
-]
-
 const statusData = [
     {
         label: 'Semua',
@@ -94,11 +79,29 @@ const statusData = [
 ]
 
 export default function AllCompany() {
+    const router = useRouter()
     const [status, setStatus] = React.useState('all')
 
     const handleStatus = (e) => {
         setStatus(e.target.value)
     }
+
+    const detailBtn = (id) => {
+        console.log('Detail: ' + id)
+        router.push('/company/detail-company')
+    }
+    
+    const actionBtn = [
+        {
+            icon: <EditIcon />,
+            id: 'edit'
+        },
+        {
+            icon: <VisibilityIcon />,
+            id: 'detail',
+            function: (id) => detailBtn(id)
+        },
+    ]
 
     return(<>
         <div>
