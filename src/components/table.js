@@ -9,8 +9,6 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import IconButton from '@mui/material/IconButton'
-import EditIcon from '@mui/icons-material/Edit'
-import VisibilityIcon from '@mui/icons-material/Visibility'
 
 const CustomTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -38,31 +36,36 @@ export default function CustomTable({columns, data, actionButton}) {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <CustomTableCell className={styles.column}>No</CustomTableCell>
+                        <CustomTableCell>No</CustomTableCell>
                         {columns.length > 0 && columns.map((column, index) => (
                             <CustomTableCell key={index} className={styles.column}>{column.label}</CustomTableCell>
                         ))}
-                        <CustomTableCell className={styles.column}>Aksi</CustomTableCell>
+                        <CustomTableCell>Aksi</CustomTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map((item, index) => (
-                        <CustomTableRow key={index}>
-                            <CustomTableCell>{index+1}</CustomTableCell>
-                            {columns.map((col, index) => (
-                                <CustomTableCell key={index}>{col.render(item)}</CustomTableCell>
-                            ))}
-                            <CustomTableCell>
-                                <div>
-                                    {actionButton.map((btn, index) => (
-                                        <IconButton key={index} onClick={() => btn.function(item.id)}>
-                                            {btn.icon}
-                                        </IconButton>
-                                    ))}
-                                </div>
-                            </CustomTableCell>
+                    {data !== undefined ? 
+                        data.map((item, index) => (
+                            <CustomTableRow key={index}>
+                                <CustomTableCell>{index+1}</CustomTableCell>
+                                {columns.map((col, index) => (
+                                    <CustomTableCell key={index}>{col.render(item)}</CustomTableCell>
+                                ))}
+                                <CustomTableCell>
+                                    <div className={styles.actions}>
+                                        {actionButton !== undefined && actionButton.map((btn, index) => (
+                                            <IconButton key={index} onClick={() => btn.function(item.id)}>
+                                                {btn.icon}
+                                            </IconButton>
+                                        ))}
+                                    </div>
+                                </CustomTableCell>
+                            </CustomTableRow>
+                        )) :
+                        <CustomTableRow>
+                            <CustomTableCell align="center" colSpan={10}>Belum ada data tersedia</CustomTableCell>
                         </CustomTableRow>
-                    ))}
+                    }
                 </TableBody>
             </Table>
         </TableContainer>
