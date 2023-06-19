@@ -4,6 +4,7 @@ import Image from "next/image"
 import cn from 'classnames'
 import Laptop from '@/public/laptop-work.png'
 import { CustomChip } from "@/components/chip"
+import Link from "next/link"
 
 export default function DetailCompany() {
     return(<>
@@ -44,7 +45,7 @@ export default function DetailCompany() {
             </div>
             <div className="row">
                 <div className="col-3"><b>Website</b></div>
-                <div className="col-6">metanesia.co.id</div>
+                <div className="col-6"><Link href='#'>metanesia.co.id</Link></div>
             </div>
         </div>
     </>)
