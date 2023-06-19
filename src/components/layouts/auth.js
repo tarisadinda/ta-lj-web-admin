@@ -1,5 +1,12 @@
 import React from 'react'
 import Footer from '../footer'
+import { ThemeProvider, createTheme } from '@mui/material';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Inter, sans-serif',
+  },
+})
 
 export default function LayoutAuth({ children }) {
     return (
@@ -21,10 +28,12 @@ export default function LayoutAuth({ children }) {
                 width: auto;
             }
         `}</style>
-        <div className='container auth-wrap'>
-            <main className='main flex-grow-1'>{children}</main>
-            <Footer />
-        </div>
+        <ThemeProvider theme={theme}>
+          <div className='container auth-wrap'>
+              <main className='main flex-grow-1'>{children}</main>
+              <Footer />
+          </div>
+        </ThemeProvider>
       </>  
     )
 }
