@@ -42,7 +42,7 @@ export default function NewSubmission() {
     const router = useRouter()
 
     const detailBtn = (id) => {
-        router.push('/company/detail-company')
+        router.push('/company/detail-verification')
     }
 
     const actionBtn = [
