@@ -33,10 +33,15 @@ const bottomMenu = [
 ]
 
 export default function Navbar() {
-  const [open, setOpen] = React.useState(true)
+  const [openCompanyList, setOpenCompanyList] = React.useState(false)
+  const [openEmployeeList, setOpenEmployeeList] = React.useState(false)
 
-  const handleClick = () => {
-    setOpen(!open)
+  const handleCompanyList = () => {
+    setOpenCompanyList(!openCompanyList)
+  }
+
+  const handleEmployeList = () => {
+    setOpenEmployeeList(!openEmployeeList)
   }
 
   return (
@@ -62,11 +67,11 @@ export default function Navbar() {
                     <ListItemText primary="Dashboard" />
                 </ListItemButton>
             </Link>
-            <ListItemButton onClick={handleClick}>
+            <ListItemButton onClick={handleCompanyList}>
                 <ListItemText primary="Perusahaan" />
-                {open ? <ExpandLess /> : <ExpandMore />}
+                {openCompanyList ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
+            <Collapse in={openCompanyList} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   <Link href='/company/new-submission' className={styles.link}>
                     <ListItemButton sx={{ pl: 4 }}>
@@ -76,6 +81,24 @@ export default function Navbar() {
                   <Link href='/company/all' className={styles.link}>
                     <ListItemButton sx={{ pl: 4 }}>
                       <ListItemText primary="Semua Perusahaan" />
+                    </ListItemButton>
+                  </Link>
+                </List>
+            </Collapse>
+            <ListItemButton onClick={handleEmployeList}>
+                <ListItemText primary="Pekerja" />
+                {openCompanyList ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={openEmployeeList} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <Link href='/company/new-submission' className={styles.link}>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemText primary="Pengguna Baru" />
+                    </ListItemButton>
+                  </Link>
+                  <Link href='/company/all' className={styles.link}>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemText primary="Semua Pekerja" />
                     </ListItemButton>
                   </Link>
                 </List>
