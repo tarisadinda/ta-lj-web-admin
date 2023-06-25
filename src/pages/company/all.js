@@ -7,6 +7,7 @@ import CustomTable from '@/components/table'
 import CustomDropdown from '@/components/custom-dropdown'
 import EditIcon from '@mui/icons-material/Edit'
 import VisibilityIcon from '@mui/icons-material/Visibility'
+import DeleteIcon from '@mui/icons-material/Delete'
 import { useRouter } from 'next/router'
 
 const dummyData = [
@@ -95,6 +96,10 @@ export default function AllCompany() {
         {
             icon: <EditIcon />,
             id: 'edit'
+        },
+        {
+            icon: <DeleteIcon />,
+            id: 'delete'
         },
         {
             icon: <VisibilityIcon />,
