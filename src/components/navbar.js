@@ -35,6 +35,7 @@ const bottomMenu = [
 export default function Navbar() {
   const [openCompanyList, setOpenCompanyList] = React.useState(false)
   const [openEmployeeList, setOpenEmployeeList] = React.useState(false)
+  const [openSkillList, setOpenSkillList] = React.useState(false)
 
   const handleCompanyList = () => {
     setOpenCompanyList(!openCompanyList)
@@ -42,6 +43,10 @@ export default function Navbar() {
 
   const handleEmployeList = () => {
     setOpenEmployeeList(!openEmployeeList)
+  }
+
+  const handleSkillList = () => {
+    setOpenSkillList(!openSkillList)
   }
 
   return (
@@ -72,36 +77,49 @@ export default function Navbar() {
                 {openCompanyList ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={openCompanyList} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <Link href='/company/new-submission' className={styles.link}>
-                    <ListItemButton sx={{ pl: 4 }}>
-                      <ListItemText primary="Pengajuan Baru" />
-                    </ListItemButton>
-                  </Link>
-                  <Link href='/company/all' className={styles.link}>
-                    <ListItemButton sx={{ pl: 4 }}>
-                      <ListItemText primary="Semua Perusahaan" />
-                    </ListItemButton>
-                  </Link>
-                </List>
+              <List component="div" disablePadding>
+                <Link href='/company/new-submission' className={styles.link}>
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemText primary="Pengajuan Baru" />
+                  </ListItemButton>
+                </Link>
+                <Link href='/company/all' className={styles.link}>
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemText primary="Semua Perusahaan" />
+                  </ListItemButton>
+                </Link>
+              </List>
             </Collapse>
             <ListItemButton onClick={handleEmployeList}>
                 <ListItemText primary="Pekerja" />
-                {openCompanyList ? <ExpandLess /> : <ExpandMore />}
+                {openEmployeeList ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={openEmployeeList} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <Link href='/company/new-submission' className={styles.link}>
-                    <ListItemButton sx={{ pl: 4 }}>
-                      <ListItemText primary="Pengguna Baru" />
-                    </ListItemButton>
-                  </Link>
-                  <Link href='/company/all' className={styles.link}>
-                    <ListItemButton sx={{ pl: 4 }}>
-                      <ListItemText primary="Semua Pekerja" />
-                    </ListItemButton>
-                  </Link>
-                </List>
+              <List component="div" disablePadding>
+                <Link href='/employee/all' className={styles.link}>
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemText primary="Semua Pekerja" />
+                  </ListItemButton>
+                </Link>
+              </List>
+            </Collapse>
+            <ListItemButton onClick={handleSkillList}>
+                <ListItemText primary="Pengajuan Keahlian" />
+                {openSkillList ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={openSkillList} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <Link href='/skills/skill-submission' className={styles.link}>
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemText primary="Pengajuan Baru" />
+                  </ListItemButton>
+                </Link>
+                <Link href='#' className={styles.link}>
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemText primary="Proses Sertifikasi" />
+                  </ListItemButton>
+                </Link>
+              </List>
             </Collapse>
           </List>
           <List>
