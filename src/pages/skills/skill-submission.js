@@ -1,7 +1,58 @@
-import LayoutMain from "@/components/layouts/main";
-import CustomTable from "@/components/table";
+import React from 'react'
+import CustomDropdown from "@/components/custom-dropdown"
+import LayoutMain from "@/components/layouts/main"
+import CustomTable from "@/components/table"
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import { useRouter } from 'next/router'
+
+const statusData = [
+    {
+        label: 'Semua',
+        value: 'all'
+    },
+    {
+        label: 'Terverifikasi',
+        value: 'verif'
+    },
+    {
+        label: 'Belum terverifikasi',
+        value: 'unverif'
+    },
+]
+
+const dummyData = [
+    {
+        date: '10/9/2022',
+        full_name: 'Christian Wijaya',
+        email: 'christian_wijaya@gmail.com',
+        skill: 'Mobile developer',
+        status: 'Menunggu Konfirmasi'
+    },
+    {
+        date: '14/9/2022',
+        full_name: 'Andira',
+        email: 'andira2001@gmail.com',
+        skill: 'Mobile developer',
+        status: 'Menunggu Konfirmasi'
+    },
+    {
+        date: '5/10/2022',
+        full_name: 'Riko Kurniawan',
+        email: 'riko@gmail.com',
+        skill: 'Web developer',
+        status: 'Menunggu Konfirmasi'
+    }
+]
 
 export default function SkillSubmission() {
+    const router = useRouter()
+    const [chooseStatus, setChooseStatus] = React.useState('all')
+
+    const detailBtn = (id) => {
+        console.log('Detail: ' + id)
+        router.push('/skills/detail')
+    }
+
     const colList = [
         {
             id: 'date',
@@ -30,11 +81,28 @@ export default function SkillSubmission() {
         },
     ]
 
+    const actionBtn = [
+        {
+            icon: <VisibilityIcon />,
+            id: 'detail',
+            function: (id) => detailBtn(id)
+        },
+    ]
+
     return(<>
         <h4><b>Daftar Pengajuan Keahlian</b></h4>
+        <div className='mt-4 mb-2'>
+            <CustomDropdown 
+                value={chooseStatus} 
+                data={statusData} 
+                onChange={(e) => setChooseStatus(e.target.value)} 
+            />
+        </div>
         <div className="mt-3">
             <CustomTable 
                 columns={colList}
+                data={dummyData}
+                actionButton={actionBtn}
             />
         </div>
     </>)
