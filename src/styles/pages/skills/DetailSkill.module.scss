@@ -29,14 +29,17 @@
 
 .cardStatus {
     display: flex;
-    width: 750px;
+    width: max-content;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 10px;
     border-radius: 10px;
     margin-top: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .updateBtn {
+    margin-left: 70px;
     width: 100px;
 }
