@@ -1,9 +1,11 @@
+import React from 'react'
 import LayoutMain from "@/components/layouts/main"
 import CustomTable from "@/components/table"
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import CheckIcon from '@mui/icons-material/Check'
 import ClearIcon from '@mui/icons-material/Clear'
 import { useRouter } from "next/router"
+import TrueFalseModal from "@/components/modals/true-false-modal"
 
 const colList = [
     {
@@ -41,10 +43,15 @@ const dummyData = [
 export default function NewSubmission() {
     const router = useRouter()
 
+    const [openModal, setOpenModal] = React.useState(false)
+
     const detailBtn = (id) => {
         router.push('/company/detail-verification')
     }
 
+    const acceptBtn = (id) => {
+        setOpenModal(!openModal)
+    }
     const actionBtn = [
         {
             icon: <VisibilityIcon />,
@@ -54,6 +61,7 @@ export default function NewSubmission() {
         {
             icon: <CheckIcon />,
             id: 'accept',
+            function: (id) => acceptBtn(id)
         },
         {
             icon: <ClearIcon />,
@@ -70,6 +78,13 @@ export default function NewSubmission() {
                 actionButton={actionBtn}
             />
         </div>
+        <TrueFalseModal 
+            title='Apakah anda yakin untuk menerima pengajuan akun ini?'
+            desc='Pastikan sudah mengecek informasi dengan benar.'
+            open={openModal} 
+            onClose={acceptBtn} 
+            acceptBtn={acceptBtn} 
+        />
     </>)
 }
 
