@@ -1,19 +1,29 @@
 import LayoutAuth from "@/components/layouts/auth"
 import styles from "@/styles/pages/Login.module.scss"
 import axios from "axios"
+import { Alert, Snackbar } from '@mui/material'
 import cn from 'classnames'
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React from "react"
+import { getToken } from "src/utils/token"
 
 export default function Login() {
+    let vertical = 'top'
+    let horizontal = 'center'
+
     const LOGIN_API = '/admin/login'
 
     const router = useRouter()
+    const token = getToken()
+    const [errorMsg, setErrorMsg] = React.useState('')
     const [userAccount, setUserAccount] = React.useState({
         username: '',
         password: ''
     })
+
+    console.log(token)
+    const [openToast, setOpenToast] = React.useState(false)
 
     const handleChange = (e) => {
         setUserAccount({
@@ -38,13 +48,24 @@ export default function Login() {
                 headers: { "Content-Type": "multipart/form-data" },
             })
 
+            console.log(res)
             if(res.status === 200) {
+                sessionStorage.setItem('user_token', res.data.token)
+
                 router.push('/dashboard')
             }
         } catch (err) {
-            console.log(err.response)
+            if(err) {
+                if( err.response?.status === 401) {
+                    setErrorMsg(err.response.data.message)
+                    setOpenToast(true)
+                }
+            }
         }
     }
+
+    console.log(errorMsg)
+    console.log(openToast)
 
     return(<>
         <div className={styles.wrapper}>
@@ -68,6 +89,14 @@ export default function Login() {
                 </div>
             </form>
         </div>
+        <Snackbar 
+            open={openToast} 
+            onClose={() => setOpenToast(false)}
+            autoHideDuration={2500} 
+            anchorOrigin={{vertical, horizontal}}
+        >
+            <Alert severity="error">{errorMsg}</Alert>
+        </Snackbar>
     </>)
 }
 
