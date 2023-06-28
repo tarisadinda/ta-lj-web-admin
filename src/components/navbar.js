@@ -11,13 +11,12 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const drawerWidth = 240
 
@@ -33,6 +32,7 @@ const bottomMenu = [
 ]
 
 export default function Navbar() {
+  const router = useRouter()
   const [openCompanyList, setOpenCompanyList] = React.useState(false)
   const [openEmployeeList, setOpenEmployeeList] = React.useState(false)
   const [openSkillList, setOpenSkillList] = React.useState(false)
@@ -47,6 +47,11 @@ export default function Navbar() {
 
   const handleSkillList = () => {
     setOpenSkillList(!openSkillList)
+  }
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('user_token')
+    router.push('/login')
   }
 
   return (
@@ -123,18 +128,24 @@ export default function Navbar() {
             </Collapse>
           </List>
           <List>
-            {bottomMenu.map((text, index) => (
-              <ListItem key={index} disablePadding>
-                <Link href={text.link} className={styles.link}>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            {text.label === 'Logout' ? <LogoutIcon fontSize="small" /> : <PersonIcon fontSize="small" />}
-                        </ListItemIcon>
-                        <ListItemText primary={text.label} />
-                    </ListItemButton>
-                </Link>
-              </ListItem>
-            ))}
+            <ListItem disablePadding>
+              <Link href='#' className={styles.link}>
+                  <ListItemButton>
+                      <ListItemIcon>
+                        <PersonIcon fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText primary='Profil Saya' />
+                  </ListItemButton>
+              </Link>
+            </ListItem>
+            <ListItem disablePadding onClick={handleLogout}>
+              <ListItemButton>
+                  <ListItemIcon>
+                    <LogoutIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText primary='Logout' />
+              </ListItemButton>
+            </ListItem>
           </List>
         </Box>
       </Drawer>
