@@ -51,7 +51,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     sessionStorage.removeItem('user_token')
-    router.push('/login')
+    router.push('/')
   }
 
   return (
@@ -75,6 +75,11 @@ export default function Navbar() {
             <Link href='/dashboard' className={styles.link}>
                 <ListItemButton>
                     <ListItemText primary="Dashboard" />
+                </ListItemButton>
+            </Link>
+            <Link href='/dashboard' className={styles.link}>
+                <ListItemButton>
+                    <ListItemText primary="Kategori Pekerjaan" />
                 </ListItemButton>
             </Link>
             <ListItemButton onClick={handleCompanyList}>
