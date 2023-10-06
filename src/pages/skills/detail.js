@@ -5,7 +5,7 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile'
 import { Card, DialogContent } from '@mui/material'
 import CustomDialog from '@/components/dialog'
 import React from 'react'
-import CustomDropdown from '@/components/custom-dropdown'
+import CustomDropdown from '@/components/common/custom-dropdown'
 
 const statusData = [
     {

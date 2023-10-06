@@ -3,7 +3,7 @@ import styles from '@/styles/pages/company/DetailCompany.module.scss'
 import Image from "next/image"
 import cn from 'classnames'
 import Laptop from '@/public/laptop-work.png'
-import { CustomChip } from "@/components/chip"
+import { CustomChip } from "@/components/common/chip"
 import Link from "next/link"
 
 export default function DetailCompany() {

@@ -1,6 +1,6 @@
 import React from 'react'
 import LayoutMain from "@/components/layouts/main"
-import CustomTable from "@/components/table"
+import CustomTable from "@/components/common/table"
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import CheckIcon from '@mui/icons-material/Check'
 import ClearIcon from '@mui/icons-material/Clear'
