@@ -1,5 +1,5 @@
 import { Select, MenuItem, FormControl } from '@mui/material'
-import styles from '@/styles/components/CustomDropdown.module.scss'
+import styles from '@/styles/components/common/CustomDropdown.module.scss'
 
 export default function CustomDropdown({
     value,
