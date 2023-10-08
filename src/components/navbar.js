@@ -34,15 +34,10 @@ const bottomMenu = [
 export default function Navbar() {
   const router = useRouter()
   const [openCompanyList, setOpenCompanyList] = React.useState(false)
-  const [openEmployeeList, setOpenEmployeeList] = React.useState(false)
   const [openSkillList, setOpenSkillList] = React.useState(false)
 
   const handleCompanyList = () => {
     setOpenCompanyList(!openCompanyList)
-  }
-
-  const handleEmployeList = () => {
-    setOpenEmployeeList(!openEmployeeList)
   }
 
   const handleSkillList = () => {
@@ -77,7 +72,7 @@ export default function Navbar() {
                     <ListItemText primary="Dashboard" />
                 </ListItemButton>
             </Link>
-            <Link href='/dashboard' className={styles.link}>
+            <Link href='/job-categories' className={styles.link}>
                 <ListItemButton>
                     <ListItemText primary="Kategori Pekerjaan" />
                 </ListItemButton>
@@ -100,19 +95,11 @@ export default function Navbar() {
                 </Link>
               </List>
             </Collapse>
-            <ListItemButton onClick={handleEmployeList}>
-                <ListItemText primary="Pekerja" />
-                {openEmployeeList ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={openEmployeeList} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <Link href='/employee/all' className={styles.link}>
-                  <ListItemButton sx={{ pl: 4 }}>
+            <Link href='/employee/all' className={styles.link}>
+                <ListItemButton>
                     <ListItemText primary="Semua Pekerja" />
-                  </ListItemButton>
-                </Link>
-              </List>
-            </Collapse>
+                </ListItemButton>
+            </Link>
             <ListItemButton onClick={handleSkillList}>
                 <ListItemText primary="Pengajuan Keahlian" />
                 {openSkillList ? <ExpandLess /> : <ExpandMore />}
