@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import '@/styles/globals.scss'
-import { ThemeProvider, createTheme } from '@mui/material';
+import { ThemeProvider, createTheme, StyledEngineProvider } from '@mui/material';
 
 const theme = createTheme({
   typography: {
@@ -13,7 +13,9 @@ export default function App({ Component, pageProps }) {
 
   return getLayout(<>
     <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
+      <StyledEngineProvider injectFirst>
+        <Component {...pageProps} />
+      </StyledEngineProvider>
     </ThemeProvider>
   </>) 
 }
