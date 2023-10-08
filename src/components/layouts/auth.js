@@ -20,18 +20,22 @@ export default function LayoutAuth({ children }) {
                 transform: translate(-50%, -50%);
                 display: flex;
                 flex-direction: column;
-                padding: 100px 0px 30px 0px;
+                padding: 60px 0px 30px 0px;
             }
 
             .main {
                 height: auto;
                 width: auto;
+                display: flex;
+                align-items: center;
             }
         `}</style>
         <ThemeProvider theme={theme}>
           <div className='container auth-wrap'>
               <main className='main flex-grow-1'>{children}</main>
-              <Footer />
+              <div className='mt-5'>
+                <Footer />
+              </div>
           </div>
         </ThemeProvider>
       </>  
