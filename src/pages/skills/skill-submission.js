@@ -1,7 +1,7 @@
 import React from 'react'
-import CustomDropdown from "@/components/custom-dropdown"
+import CustomDropdown from "@/components/common/custom-dropdown"
 import LayoutMain from "@/components/layouts/main"
-import CustomTable from "@/components/table"
+import CustomTable from "@/components/common/table"
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useRouter } from 'next/router'
 
