@@ -48,7 +48,6 @@ export default function Login() {
 
         axiosInstance.post(LOGIN_API, formData)
         .then((res) => {
-            console.log(res)
             if(res.data.status === "success") {
                 setToken(res.data.token)
                 router.push('/dashboard')
@@ -56,7 +55,7 @@ export default function Login() {
         }).catch((err) => {
             if(err) {
                 if( err.response?.status !== 200) {
-                    setErrorMsg(err.response.data.message)
+                    setErrorMsg(err.response?.data.message)
                     setOpenToast(true)
                 }
             }
@@ -97,7 +96,7 @@ export default function Login() {
                     </div>
                     <button type="submit" className={cn(styles.loginBtn, "btn btn-primary blue")}>Login</button>
                     <div className="mt-2">
-                        <p className={styles.registText}>Belum punya akun? <Link href="#"><span>Daftar</span></Link></p>
+                        <p className={styles.registText}>Belum punya akun? <Link href="/register"><span>Daftar</span></Link></p>
                     </div>
                 </div>
             </form>
