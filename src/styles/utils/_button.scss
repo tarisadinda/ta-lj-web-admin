@@ -45,3 +45,19 @@
         box-shadow: inset 0px 0px 0px 2px #C3C3C3;
     }
 }
+
+.btn-ghost {
+    @extend %button-shape;
+
+    color: $dark;
+    background-color: transparent;
+
+    &:hover {
+        color: $light;
+        background-color: $blue-1;
+    }
+
+    &:active, &:focus {
+        border: 0px;
+    }
+}
