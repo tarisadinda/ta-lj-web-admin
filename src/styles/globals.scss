@@ -1,4 +1,4 @@
-@import 'main.scss';
+@import './main.scss';
 
 * {
   box-sizing: border-box;
@@ -21,6 +21,11 @@ body {
 .btn {
   font-size: 14px;
   border-radius: 10px;
+}
+
+.error-msg {
+  color: $red;
+  font-size: $font-12;
 }
 
 @media (prefers-color-scheme: dark) {
