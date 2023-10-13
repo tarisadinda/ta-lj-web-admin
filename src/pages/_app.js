@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import '@/styles/globals.scss'
 import { ThemeProvider, createTheme, StyledEngineProvider } from '@mui/material';
+import { Provider } from 'react-redux';
+import { store } from 'src/redux/store';
 
 const theme = createTheme({
   typography: {
@@ -14,7 +16,9 @@ export default function App({ Component, pageProps }) {
   return getLayout(<>
     <ThemeProvider theme={theme}>
       <StyledEngineProvider injectFirst>
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </StyledEngineProvider>
     </ThemeProvider>
   </>) 
