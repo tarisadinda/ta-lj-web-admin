@@ -21,7 +21,7 @@ export default function Login() {
     const [errorMsg, setErrorMsg] = React.useState('')
     const [seePassword, setSeePassword] = React.useState(false)
     const [userAccount, setUserAccount] = React.useState({
-        username: '',
+        username: 'min',
         password: ''
     })
 
