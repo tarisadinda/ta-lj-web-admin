@@ -1,9 +1,9 @@
 import { Dialog, DialogTitle, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 
-export default function CustomDialog({open, title, handleClose, children}) {
+export default function CustomDialog({open, title, handleClose, children, ...props}) {
     return(<>
-        <Dialog open={open} onClose={handleClose}>
+        <Dialog open={open} onClose={handleClose} {...props}>
             <DialogTitle
                 sx={{
                     minWidth: '450px'
