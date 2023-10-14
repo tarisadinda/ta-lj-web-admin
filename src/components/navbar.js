@@ -15,21 +15,11 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const drawerWidth = 240
-
-const bottomMenu = [
-    {
-        label: 'Profil Saya',
-        link: '#'
-    },
-    {
-        label: 'Logout',
-        link: '/login'
-    }
-]
 
 export default function Navbar() {
   const router = useRouter()
@@ -54,6 +44,12 @@ export default function Navbar() {
       <CssBaseline />
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
+          <Link href='/' className={styles.link}>
+            <div className={styles.profileBtn}>
+              <AccountCircleIcon sx={{ fontSize: 40 }} />
+              <p className={styles.name}>Admin</p>
+            </div>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -75,6 +71,11 @@ export default function Navbar() {
             <Link href='/job-categories' className={styles.link}>
                 <ListItemButton>
                     <ListItemText primary="Kategori Pekerjaan" />
+                </ListItemButton>
+            </Link>
+            <Link href='/payroll' className={styles.link}>
+                <ListItemButton>
+                    <ListItemText primary="Penghasilan" />
                 </ListItemButton>
             </Link>
             <ListItemButton onClick={handleCompanyList}>
@@ -120,16 +121,6 @@ export default function Navbar() {
             </Collapse>
           </List>
           <List>
-            <ListItem disablePadding>
-              <Link href='#' className={styles.link}>
-                  <ListItemButton>
-                      <ListItemIcon>
-                        <PersonIcon fontSize="small" />
-                      </ListItemIcon>
-                      <ListItemText primary='Profil Saya' />
-                  </ListItemButton>
-              </Link>
-            </ListItem>
             <ListItem disablePadding onClick={handleLogout}>
               <ListItemButton>
                   <ListItemIcon>

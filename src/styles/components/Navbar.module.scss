@@ -10,3 +10,17 @@
     text-decoration: none;
     color: $dark;
 }
+
+.profileBtn {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    column-gap: 10px;
+    color: $light;
+
+    .name {
+        margin-bottom: 0px;
+        font-size: $font-16;
+        font-weight: 600;
+    }
+}
