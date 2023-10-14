@@ -89,7 +89,6 @@ export default function JobCategories() {
 
     return(<>
         <h4><b>Kategori Pekerjaan</b></h4>
-        <div></div>
         <div className={styles.addBtn}>
             <IconBtn 
                 title='Tambah Kategori' 
