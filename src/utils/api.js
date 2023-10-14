@@ -1,3 +1,7 @@
 export const API_CATEGORY_LIST = '/operation/category/index'
 export const API_ADD_CAT = '/operation/category/store'
 export const API_DELETE_CAT = '/operation/category/destroy/'
+export const API_SALARY_START = '/operation/SalaryStart/index'
+export const API_SALARY_END = '/operation/SalaryEnd/index'
+export const API_SAVE_SAL_START = '/operation/SalaryStart/store'
+export const API_SAVE_SAL_END = '/operation/SalaryEnd/store'
