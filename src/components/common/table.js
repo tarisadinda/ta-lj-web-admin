@@ -9,6 +9,8 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import IconButton from '@mui/material/IconButton'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 const CustomTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -30,7 +32,8 @@ const CustomTableRow = styled(TableRow)(({ theme }) => ({
     },
 }))
 
-export default function CustomTable({columns, data, actionButton}) {
+export default function CustomTable({columns, data, actionButton, deleteData, deleteFunc,
+    editData, editFunc}) {
     return(<>
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -44,7 +47,7 @@ export default function CustomTable({columns, data, actionButton}) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data !== undefined ? 
+                    {data && data.length > 0 ? 
                         data.map((item, index) => (
                             <CustomTableRow key={index}>
                                 <CustomTableCell>{index+1}</CustomTableCell>
@@ -58,6 +61,16 @@ export default function CustomTable({columns, data, actionButton}) {
                                                 {btn.icon}
                                             </IconButton>
                                         ))}
+                                        {deleteData &&
+                                            <IconButton onClick={() => deleteFunc(item.category_id)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        }
+                                        {editData &&
+                                            <IconButton onClick={() => editFunc(item.category_id)}>
+                                                <EditIcon />
+                                            </IconButton>
+                                        }
                                     </div>
                                 </CustomTableCell>
                             </CustomTableRow>
