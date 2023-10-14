@@ -3,7 +3,7 @@ import LayoutMain from "@/components/layouts/main"
 import styles from '@/styles/pages/skills/DetailSkill.module.scss'
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile'
 import { Card, DialogContent } from '@mui/material'
-import CustomDialog from '@/components/dialog'
+import CustomDialog from '@/components/common/dialog'
 import React from 'react'
 import CustomDropdown from '@/components/common/custom-dropdown'
 
