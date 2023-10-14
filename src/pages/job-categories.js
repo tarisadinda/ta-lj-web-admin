@@ -112,7 +112,7 @@ export default function JobCategories() {
         <CustomAlert open={isOpenAlert} 
             severity="success" 
             text={alertMsg} 
-            duration={3600} 
+            duration={3500} 
             onClose={() => { dispatch(setOpenAlert(false)), dispatch(setMessage('')) }} 
         />
     </>)
