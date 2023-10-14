@@ -7,6 +7,7 @@
 
 .btn-primary {
     @extend %button-shape;
+    border: 0px;
 
     &.blue {
         color: $light;
@@ -18,6 +19,18 @@
         }
     }
 
+
+    &.red {
+        color: $light;
+        background-color: $red;
+        border: 0px;
+
+        &:hover, &:active {
+            border: 0px;
+            background-color: $dark-red;
+        }
+    }
+
     &.disabled {
         color: #676767;
         background-color: #ADADAD;
@@ -26,11 +39,11 @@
 
 .btn-secondary {
     @extend %button-shape;
+    border: 0px;
 
     &.blue {
         background-color: $blue-4;
         color: $blue-1;
-        border: none;
         box-shadow: inset 0px 0px 0px 1px $blue-1;
 
         &:hover, &:active {
@@ -46,18 +59,28 @@
     }
 }
 
+.btn-outline {
+    @extend %button-shape;
+    
+    &.gray {
+        color: $dark;
+        background-color: $light;
+        border-color: $dark;
+
+        &:hover, &:active {
+            background-color: $gray-4;
+        }
+    }
+}
+
 .btn-ghost {
     @extend %button-shape;
-
+    border: 0px;
     color: $dark;
     background-color: transparent;
 
     &:hover {
         color: $light;
         background-color: $blue-1;
-    }
-
-    &:active, &:focus {
-        border: 0px;
     }
 }
