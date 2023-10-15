@@ -11,7 +11,9 @@ import { API_CATEGORY_LIST, API_DELETE_CAT } from 'src/utils/api'
 import ConfirmDeleteModal from '@/components/modals/confirm-delete'
 import CustomAlert from '@/components/common/custom-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { alertMessage, openAlert, setMessage, setOpenAlert } from 'src/redux/slices/alertSlice'
+import { alertMessage, openAlert, setMessage, setOpenAlert, severity } from 'src/redux/slices/alertSlice'
+import EditCategoryModal from '@/components/modals/edit-category'
+import { openModal, setOpenModal } from 'src/redux/slices/modalSlice'
 
 const colList = [
     {
@@ -31,11 +33,14 @@ export default function JobCategories() {
     const effectRan = useRef(false)
 
     const isOpenAlert = useSelector(openAlert)
+    const alertSeverity = useSelector(severity)
     const alertMsg = useSelector(alertMessage)
+    const isEditModal = useSelector(openModal)
 
-    const [openModal, setOpenModal] = React.useState(false)
+    const [openCatModal, setOpenCatModal] = React.useState(false)
     const [askDelete, setAskDelete] = React.useState(false)
     const [deleteId, setDeleteId] = React.useState('')
+    const [editCatId, setEditCatId] = React.useState('')
     const [categoryList, setCategoryList] = React.useState([])
 
     const getCategoryList = () => {
@@ -53,11 +58,9 @@ export default function JobCategories() {
                     ])
                 }
             })
-        }).catch((err) => {
-        })
+        }).catch((err) => {})
     }
 
-    console.log(categoryList)
     React.useEffect(() => {
         if (effectRan.current === false) {
           getCategoryList()  
@@ -68,7 +71,6 @@ export default function JobCategories() {
         }
     }, [])
 
-    console.log(deleteId)
     const deleteItem = () => {
         if(deleteId !== '') {
             axiosInstance.get(API_DELETE_CAT + deleteId)
@@ -77,8 +79,7 @@ export default function JobCategories() {
                 setDeleteId('')
                 dispatch(setMessage(res.data.message))
                 dispatch(setOpenAlert(true))
-            }).catch((err) => {
-            })
+            }).catch((err) => {})
         }
     }
 
@@ -87,33 +88,49 @@ export default function JobCategories() {
         setAskDelete(true)
     }
 
+    const editItem = (id) => {
+        dispatch(setOpenModal(true))
+
+        if(id) {
+            setEditCatId(id)
+        }
+    }
+
+    console.log(editCatId)
+    
     return(<>
         <h4><b>Kategori Pekerjaan</b></h4>
         <div className={styles.addBtn}>
             <IconBtn 
                 title='Tambah Kategori' 
                 startIcon={<SVGAdd />}
-                onClick={() => setOpenModal(!openModal)}
+                onClick={() => setOpenCatModal(!openCatModal)}
                 className="btn btn-primary blue" 
             />
         </div>        
         <CustomTable 
             columns={colList}
             data={categoryList}
+            idKey='category_id'
             deleteData
             deleteFunc={modalDelete}
             editData
+            editFunc={editItem}
         />
-        <AddCategoryModal open={openModal} onClose={() => setOpenModal(false)} />
+        <AddCategoryModal open={openCatModal} onClose={() => setOpenCatModal(false)} />
         <ConfirmDeleteModal open={askDelete} 
             delFunc={deleteItem} 
             onClose={() => { setAskDelete(false), setDeleteId('') }} 
         />
         <CustomAlert open={isOpenAlert} 
-            severity="success" 
+            severity={alertSeverity}
             text={alertMsg} 
             duration={3500} 
             onClose={() => { dispatch(setOpenAlert(false)), dispatch(setMessage('')) }} 
+        />
+        <EditCategoryModal id={editCatId} 
+            open={isEditModal} 
+            onClose={() => { dispatch(setOpenModal(false)); setEditCatId('') }} 
         />
     </>)
 }
