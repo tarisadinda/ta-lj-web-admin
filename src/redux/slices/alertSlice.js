@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const alertState = {
     openAlert: false,
-    message: ''
+    message: '',
+    severity: 'success'
 }
 
 export const alertSlice = createSlice({
@@ -14,13 +15,17 @@ export const alertSlice = createSlice({
         },
         setMessage(state, action) {
             state.message = action.payload
+        },
+        setSeverity(state, action) {
+            state.severity = action.payload
         }
     }
 })
 
-export const { setOpenAlert, setMessage } = alertSlice.actions
+export const { setOpenAlert, setMessage, setSeverity } = alertSlice.actions
 
 export const openAlert = (state) => state.alert.openAlert
 export const alertMessage = (state) => state.alert.message
+export const severity = (state) => state.alert.severity
 
 export default alertSlice.reducer
