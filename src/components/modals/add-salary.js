@@ -36,7 +36,6 @@ export default function AddSalaryModal({ open, onClose }) {
     const { errors } = formState;
 
     const saveSalary = (data) => {
-        console.log(data)
         if(data) {
             if(dataSalary.category === 'min') {
                 let formData = {
