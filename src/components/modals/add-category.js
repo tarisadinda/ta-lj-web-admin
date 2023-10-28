@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { axiosInstance } from 'src/utils/axios'
 import { useState } from 'react'
 import { API_ADD_CAT } from 'src/utils/api'
-import { setMessage, setOpenAlert } from 'src/redux/slices/alertSlice'
+import { setMessage, setOpenAlert, setSeverity } from 'src/redux/slices/alertSlice'
 
 export default function AddCategoryModal({ open, onClose }) {
     const dispatch = useDispatch()
@@ -28,8 +28,20 @@ export default function AddCategoryModal({ open, onClose }) {
             if(res.status === 200) {
                 dispatch(setOpenAlert(true))
                 dispatch(setMessage('Data berhasil ditambahkan'))
+                dispatch(setSeverity('success'))
             }
         }).catch((err) => {
+            console.log(err)
+
+            if(err) {
+                dispatch(setMessage(err.response.data.message))
+                dispatch(setSeverity('error'))
+                dispatch(setOpenAlert(true))
+            } else {
+                dispatch(setMessage('Data gagal ditambahkan. Silahkan ulangi kembali!'))
+                dispatch(setSeverity('error'))
+                dispatch(setOpenAlert(true))
+            }
         })
     }
 
