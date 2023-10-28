@@ -1,6 +1,5 @@
 import LayoutAuth from "@/components/layouts/auth"
 import styles from "@/styles/pages/Login.module.scss"
-import { Alert, Snackbar } from '@mui/material'
 import cn from 'classnames'
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -10,22 +9,19 @@ import InputIcon from "@/components/common/input-icon"
 import { axiosInstance } from "src/utils/axios"
 import SVGEye from '@/public/icons/eye.svg'
 import SVGEyeClose from '@/public/icons/eye-closed.svg'
+import CustomAlert from "@/components/common/custom-alert"
+import { LOGIN_API } from "src/utils/api"
 
 export default function Login() {
-    let vertical = 'top'
-    let horizontal = 'center'
-
-    const LOGIN_API = '/admin/login'
-
     const router = useRouter()
     const [errorMsg, setErrorMsg] = React.useState('')
+    const [severity, setSeverity] = React.useState('success')
+    const [openAlert, setOpenAlert] = React.useState(false)
     const [seePassword, setSeePassword] = React.useState(false)
     const [userAccount, setUserAccount] = React.useState({
         username: 'min',
         password: ''
     })
-
-    const [openToast, setOpenToast] = React.useState(false)
 
     const handleVisibility = () => {
         setSeePassword(!seePassword)
@@ -56,7 +52,8 @@ export default function Login() {
             if(err) {
                 if( err.response?.status !== 200) {
                     setErrorMsg(err.response?.data.message)
-                    setOpenToast(true)
+                    setSeverity('error')
+                    setOpenAlert(true)
                 }
             }
         })
@@ -101,14 +98,13 @@ export default function Login() {
                 </div>
             </form>
         </div>
-        <Snackbar 
-            open={openToast} 
-            onClose={() => setOpenToast(false)}
-            autoHideDuration={2500} 
-            anchorOrigin={{vertical, horizontal}}
-        >
-            <Alert severity="error">{errorMsg}</Alert>
-        </Snackbar>
+        <CustomAlert
+            open={openAlert}
+            onClose={() => { setOpenAlert(false); setErrorMsg('')}}
+            severity={severity}
+            duration={2500}
+            text={errorMsg}
+        />
     </>)
 }
 

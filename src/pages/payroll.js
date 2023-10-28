@@ -6,7 +6,7 @@ import SVGAdd from '@/public/icons/add.svg'
 import CustomTable from '@/components/common/table'
 import AddSalaryModal from '@/components/modals/add-salary'
 import { axiosInstance } from 'src/utils/axios'
-import { API_SALARY_END, API_SALARY_START } from 'src/utils/api'
+import { API_SALARY, API_SALARY_END, API_SALARY_START } from 'src/utils/api'
 import { convertDate } from 'src/utils/convert-date'
 import { useDispatch, useSelector } from 'react-redux'
 import { alertMessage, openAlert, setOpenAlert } from 'src/redux/slices/alertSlice'
@@ -14,22 +14,14 @@ import CustomAlert from '@/components/common/custom-alert'
 
 const colList = [
     {
-        id: 'salary_start_nominal',
-        label: 'Gaji Minimal',
-        render: (data) => <span>{data.salary_start_nominal}</span>
+        id: 'salary_nominal',
+        label: 'Nominal Gaji',
+        render: (data) => <span>{data.salary_nominal}</span>
     },
     {
-        id: 'createdAt',
-        label: 'Tanggal Dibuat',
-        render: (data) => <span>{convertDate(data.createdAt)}</span>
-    },
-]
-
-const colList2 = [
-    {
-        id: 'salary_end_nominal',
-        label: 'Gaji Maksimal',
-        render: (data) => <span>{data.salary_end_nominal}</span>
+        id: 'salary_flag',
+        label: 'Flag Item',
+        render: (data) => <span>{data.salary_flag}</span>
     },
     {
         id: 'createdAt',
@@ -47,28 +39,18 @@ export default function Payroll() {
     const alertMsg = useSelector(alertMessage)
 
     const [isAddSalary, setIsAddSalary] = useState(false)
-    const [salaryStartList, setSalaryStartList] = useState([])
-    const [salaryEndList, setSalaryEndList] = useState([])
+    const [salaryList, setSalaryList] = useState([])
 
-    const getSalaryStart = () => {
-        axiosInstance.get(API_SALARY_START)
+    const getSalary = () => {
+        axiosInstance.get(API_SALARY)
         .then((res) => {
-            setSalaryStartList(res.data.data)
-        }).catch((err) => {})
+            setSalaryList(res.data.data)
+        }).catch((err) => console.log(err))
     }
 
-    const getSalaryEnd = () => {
-        axiosInstance.get(API_SALARY_END)
-        .then((res) => {
-            setSalaryEndList(res.data.data)
-        })
-    }
-
-    console.log(salaryStartList)
     React.useEffect(() => {
         if (effectRan.current === false) {
-            getSalaryStart()
-            getSalaryEnd()
+            getSalary()
 
             return () => {
                 effectRan.current === true
@@ -78,7 +60,6 @@ export default function Payroll() {
 
     const deleteSalary = (id) => {
         console.log(id)
-
         // axiosInstance.get()
     }
 
@@ -96,19 +77,8 @@ export default function Payroll() {
             <p className={styles.tableName}>Daftar Penghasilan Minimal</p>
             <CustomTable
                 columns={colList}
-                data={salaryStartList}
-                idKey='salary_start_id'
-                deleteData={true}
-                editData={true}
-                deleteFunc={deleteSalary}
-            />
-        </div>
-        <div className='mt-5'>
-            <p className={styles.tableName}>Daftar Penghasilan Maksimal</p>
-            <CustomTable
-                columns={colList2}
-                data={salaryEndList}
-                idKey='salary_end_id'
+                data={salaryList}
+                idKey='salary_id'
                 deleteData={true}
                 editData={true}
                 deleteFunc={deleteSalary}
